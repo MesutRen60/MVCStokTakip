@@ -1,0 +1,78 @@
+﻿@using MVC_StokTakip.Models.Entity
+@model List<Sepet>
+
+@{
+    ViewBag.Title = "HepsiniSatinAl";
+}
+
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="card">
+
+                @{ 
+                    MVC_StokTakipEntities db = new MVC_StokTakipEntities();
+                    var username = User.Identity.Name;
+                    var model = db.Kullanicilar.FirstOrDefault(x => x.KullaniciAdi == username);
+                    var adsoyad = model.AdiSoyadi;
+
+                }
+                <div class="card-header text-uppercase gradient-ibiza"><label class="text-white">Sayın <span class="text-dark">@adsoyad </span>|| Satın Alma Sayfasına Hoşgeldiniz..</label></div>
+
+                <div class="card-body">
+                    @using (Html.BeginForm("HepsiniSatiAl", "Satislar", FormMethod.Post, new { @class = "container" }))
+                    {
+                        foreach (var item in Model)
+                        {
+                            <div class="form-group">
+                                <h5>ID:@Html.DisplayFor(x => item.ID)</h5>
+                            </div>
+                            <div class="form-group">
+                                ÜRÜN ADI:@Html.DisplayFor(x => item.Urunler.UrunAdi)
+                            </div>
+                            <div class="form-group">
+                                BARKOD NO:@Html.DisplayFor(x => item.Urunler.BarkodNo)
+                            </div>
+                            <div class="form-group">
+                                MİKTARI:@Html.DisplayFor(x => item.Miktari)
+                            </div>
+                            <div class="form-group">
+                                BİRİMİ:@Html.DisplayFor(x => item.Urunler.Birimler.Birim)
+                            </div>
+                            <div class="form-group">
+                                BİRİM FİYATI:@Html.DisplayFor(x => item.BirimFiyati)
+                            </div>
+
+                            <div class="form-group">
+                                <h5 class="text-danger text-right">TOPLAM FİYAT:@Html.DisplayFor(x => item.ToplamFiyati)</h5>
+                            </div>
+                            <hr />
+
+                        }
+                        <div class="row justify-content-end">
+                            <div class="card">
+                                <div class="card-header gradient-bloody">
+                                    @ViewBag.Tutar
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-end">
+                            <div class="form-group">
+                                <a href="/Sepet/Index" class="btn btn-danger">İptal</a>
+                            </div>
+                            <div class="form-group ml-3">
+                                <button type="submit" class="btn btn-success">Onay</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+

@@ -1,0 +1,224 @@
+﻿@model List<MVC_StokTakip.Models.Entity.Sepet>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-12 col-lg-12">
+        <div class="card">
+            <div class="card-header text-uppercase">@User.Identity.Name || Sepetim</div>
+            <div class="card-body">
+                <div class="alert alert-success alert-dismissible" role="alert">
+
+                    <div class="alert-icon">
+                        <i class="icon-check"></i>
+                    </div>
+                    <div class="alert-message">
+                        <span><strong>Başarılı!</strong> Sepetteki ürünler Başarı ile listelendi</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Sepetteki Ürünler</div>
+            <div class="card-body">
+
+                <form action="/Sepet/SeciliSil" method="post">
+                    <div class="p-4 mb-2">
+                        <input type="submit" name="submitbtn" value="Seçileni Sil" class="btn btn-danger" />
+                    </div>
+
+
+
+                    <table id="tblSepet" class="table border-primary table-responsive">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="secim" name="secim" class="filled-in chk-col-warning" />
+                                    <label for="secim"></label>
+                                </th>
+                                <th>URUN ADI</th>
+                                <th>BİRİM FİYATI</th>
+                                <th class="text-center">MİKTAR</th>
+                                <th>TOPLAM FİYAT</th>
+                                <th>TARİH</th>
+                                @*<th>SAAT</th>*@
+                                <th>İŞLEMLER</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var spt in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" name="secim_id" id="satir+@spt.ID" class="secimid filled-in chk-col-warning" value="@spt.ID" />
+                                        <label for="satir+@spt.ID"></label>
+                                    </td>
+                                    <td>@Html.DisplayFor(x => spt.Urunler.Kategoriler.Kategori)-@Html.DisplayFor(x => spt.Urunler.Markalar.Marka)- @Html.DisplayFor(x => spt.Urunler.BarkodNo)- @Html.DisplayFor(x => spt.Urunler.UrunAdi)</td>
+
+                                    <td>@Html.DisplayFor(x => spt.BirimFiyati)</td>
+
+                                    @*Bu kısım önemli*@
+                                    <td class="text-center">
+                                        <div class="kapsa">
+                                            <div>
+                                                @Html.ActionLink("-", "Azalt", new { id = spt.ID }, new { @class = "btn btn-danger btn-sm azalt" })
+                                            </div>
+                                            @Html.TextBoxFor(x => spt.Miktari, new { @class = "text", data_id = spt.ID })
+                                            <div>
+                                                @Html.ActionLink("+", "Arttir", new { id = spt.ID }, new { @class = "btn btn-primary btn-sm arttir" })
+                                            </div>
+                                        </div>
+
+
+                                    </td>
+                                    <td>@Html.DisplayFor(x => spt.ToplamFiyati) ₺</td>
+                                    <td>@Convert.ToDateTime(spt.Tarih).ToString("dd/MM/yyyy")</td>
+                                    @*<td>@Html.DisplayFor(x => spt.Tarih) ₺</td>*@
+                                    @*<td>@Html.DisplayFor(x => spt.Saat)</td>*@
+                                    @*<td>@Convert.ToDateTime(spt.Saat).ToString("dd/MM/yyyy HH:mm:ss")</td>*@
+                                    @*<td>@Convert.ToDateTime(spt.Saat).ToShortTimeString()</td>*@
+
+
+                                    <td>
+
+                                        @Html.ActionLink("Sil", "SepetSil", new { id = spt.ID }, new { @class = "btn btn-danger fa fa-trash-alt" })@*1.Yöntem*@
+                                        @Html.ActionLink("Satın Al", "SatinAl", "Satislar", new { id = spt.ID }, new { @class = "btn btn-danger fas fa-shopping-basket" })
+                                    <td>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>URUN ADI</th>
+                                <th>BİRİM FİYATI</th>
+                                <th>MİKTAR</th>
+                                <th>TOPLAM FİYAT</th>
+                                <th>TARİH</th>
+                                @*<th>SAAT</th>*@
+                                <th>İŞLEMLER</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                </form>
+                <div class="container">
+                    <div class="card border-danger mt-5 ">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12 text-right" style="font-weight:bold;">@ViewBag.Tutar</div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-md-6 align-items-center">
+                                    <span class="text-dark">
+                                        @Html.ActionLink("Hepsini Sil", "HepsiniSil", "Sepet", null, new { @class = "btn btn-danger form-control" })
+                                    </span>
+                                </div>
+
+                                <div class="col-md-6 align-self-end">
+                                    <span class="text-dark">
+                                        @Html.ActionLink("Hepsini Satın Al", "HepsiniSatinAl", "Satislar", null, new { @class = "btn btn-primary form-control" })
+                                    </span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="align-self-center form-group mt-3">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .kapsa {
+        position: relative;
+    }
+
+    .text {
+        line-height: 18px;
+        width: 50px !important;
+        height: 32px;
+        font-size: 14px;
+        text-align: center;
+        border: solid 1px #ccc;
+        margin-left: 25px;
+    }
+
+    .arttir {
+        display: block;
+        cursor: pointer;
+        border: solid 1px #ccc;
+        text-align: center;
+        font-weight: bold;
+        position: absolute;
+        margin-top: -32px;
+        margin-left: 92px;
+        border-radius: 0px;
+    }
+
+    .azalt {
+        display: block;
+        cursor: pointer;
+        border: solid 1px #ccc;
+        text-align: center;
+        font-weight: bold;
+        position: absolute;
+        border-radius: 0px;
+    }
+</style>
+
+<script>
+    $(function () {
+        $('.text').on('change', function () {
+            var miktar = $(this).val();//textin değerini al
+            var sepetId = $(this).data('id');//Text değişince seçilen verinin id sini al
+            //var sepetId = $(this).attr('data-id');
+            //alert("miktar:" + miktar + "sepetId:" + sepetId)
+            $.ajax({
+                url: '/Sepet/DinamikMiktar',
+                data: { Id: sepetId, miktar: miktar },
+                success: function (result) {
+                    document.location.reload();//İşlem başarılı olunca sayfayı yenileyecek.
+                }
+
+            });
+
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        $("#secim").click(function () {
+            if ($(this).is(":checked")) {
+                $(".secimid").prop('checked', true)
+            }
+            else {
+                $(".secimid").prop('checked', false)
+            }
+        });
+
+    });
+</script>

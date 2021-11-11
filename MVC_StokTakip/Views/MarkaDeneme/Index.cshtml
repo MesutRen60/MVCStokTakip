@@ -1,0 +1,110 @@
+﻿
+@using MVC_StokTakip.Models.Entity;
+@model List<Markalar>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 mt-5">
+        <div class="card p-2">
+            <div class="card-header"><i class="fa fa-table"></i> Marka Listesi</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Marka Listesi</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblMarka1" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>KATEGORİ</th>
+                                <th>Marka</th>
+                                <th>AÇIKLAMA</th>
+                                <th>İŞLEMLER</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var marka in Model)
+                            {
+                                <tr>
+                                    <td>@marka.ID</td>
+                                    <td>@marka.Kategoriler.Kategori</td>
+                                    <td>@marka.Marka</td>
+                                    <td>@marka.Aciklama</td>
+                                    <td>
+                                      sdsds 
+                                    </td>
+                                </tr>
+
+
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>@Model.Count() Kayıt</th>
+                                <th>KATEGORİ</th>
+                                <th>Marka</th>
+                                <th>AÇIKLAMA</th>
+                                <th>İŞLEMLER</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <br /><br />
+                    <a href="/Markadeneme/MarkaEkle" class="btn btn-success"><i class="fas fa-plus-square"></i>Yenı Marka Ekle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $("#tblMarka1").DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+            }
+        });
+    });
+</script>
+
+
+
+
+
+
+<!--Data Tables js--------------------------------->
+
+
+<div class="modal fade" id="deletekategori">
+    <div class="modal-dialog">
+        <div class="modal-content border-danger">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white"><i class="fa fa-star"></i> Kayıt Silme</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Kayıt silincektir emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Kapat</button>
+                <a class="btn btn-danger" id="modalLink"><i class="fa fa-check-square-o"></i> Sil</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

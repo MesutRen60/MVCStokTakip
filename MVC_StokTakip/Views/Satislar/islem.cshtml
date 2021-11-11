@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "islem";
+}
+
+
+@if (ViewBag.islem == "True")
+{
+    <div class="alert alert-success alert-dismissible __web-inspector-hide-shortcut__" role="alert">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <div class="alert-icon">
+            <i class="icon-check"></i>
+        </div>
+        <div class="alert-message">
+            <span><strong>Success!</strong>Satın Alma işlemi başarıyla gerçekleştirilmiştir.</span>
+        </div>
+    </div>
+}
+else if (ViewBag.islem == "Falsee")
+{
+    <div class="alert alert-danger alert-dismissible __web-inspector-hide-shortcut__" role="alert">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <div class="alert-icon">
+            <i class="alert-icon-danger"></i>
+        </div>
+        <div class="alert-message">
+            <span><strong>Success!</strong>Satın Alma işlemi başarısız..</span>
+        </div>
+    </div>
+
+}
+
+<a href="@Url.Action("Index","Urunler")" class="btn btn-primary"><i class="fa fa-backward"></i> Alışverişe Devam Et</a>

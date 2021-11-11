@@ -1,0 +1,107 @@
+﻿<div id="sidebar-wrapper" data-simplebar="" data-simplebar-auto-hide="true">
+    <div class="brand-logo">
+        <a href="index.html">
+
+            <img src="~/color-admin/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+            <h5 class="logo-text"> ADMİN PANEL</h5>
+        </a>
+    </div>
+    <div class="user-details">
+        <div class="media align-items-center user-pointer collapsed" data-toggle="collapse" data-target="#user-dropdown">
+            <div class="avatar"><img class="mr-3 side-user-img" src="~/color-admin/assets/images/avatars/mesut.png" alt="user avatar"></div>
+            <div class="media-body">
+                <h6 class="side-user-name">@User.Identity.Name</h6>
+            </div>
+        </div>
+        <div id="user-dropdown" class="collapse">
+            <ul class="user-setting-menu">
+                <li><a href="#"><i class="icon-user"></i>  Profilim</a></li>
+                <li><a href="#"><i class="icon-settings"></i> Ayarlar</a></li>
+                <li><a href="/Kullanicilar/LogOut/"><i class="icon-power"></i> Çıkış</a></li>
+              
+            </ul>
+        </div>
+    </div>
+    <ul class="sidebar-menu do-nicescrol">
+        <li class="sidebar-header">ANA BAŞLIKLAR</li>
+        <li>
+            <a href="@Url.Action("Index","Home")" class="waves-effect">
+                <i class="icon-home"></i><span>Anasayfa</span><i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="@Url.Action("Index","Home")"><i class="fa fa-long-arrow-right"></i>Anasayfa</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javaScript:void();" class="waves-effect">
+                <i class="fas fa-sliders-h"></i><span>Admin İşlemleri</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="@Url.Action("Index","Kategoriler")"><i class="fa fa-arrow-alt-circle-right"></i> Kategoriler </a></li>
+                <li><a href="@Url.Action("Index","Birimler")"><i class="fa fa-arrow-alt-circle-right"></i> Birimler </a></li>
+                <li><a href="@Url.Action("Index","Markalar")"><i class="fa fa-arrow-alt-circle-right"></i> Markalar </a></li>
+                <li><a href="@Url.Action("Index","Urunler")"><i class="fa fa-arrow-alt-circle-right"></i> Ürünler </a></li>
+                <li><a href="@Url.Action("Index","Markadeneme")"><i class="fa fa-arrow-alt-circle-right"></i> Mark2Viewbg.Yön </a></li>
+                <li><a href="@Url.Action("Index", "Kategoriler2")"><i class="fa fa-arrow-alt-circle-right"></i> Modal Popup </a></li>
+                <li><a href="@Url.Action("Index", "Satislar")"><i class="fa fa-arrow-alt-circle-right"></i> Satışlar </a></li>
+                <li><a href="@Url.Action("Index", "Export")"><i class="fa fa-arrow-alt-circle-right"></i> Export </a></li>
+
+                <li>@Html.ActionLink("Birimler", "Index", "Birimler")</li>s
+
+            </ul>
+        </li>
+
+
+        <li>
+            <a href="javaScript:void();" class="waves-effect">
+                <i class="icon-folder-alt"></i><span>Extra Pages</span>
+                <i class="fa fa-angle-left float-right"></i>
+            </a>
+            <ul class="sidebar-submenu">
+                <li><a href="pages-invoice.html"><i class="fa fa-long-arrow-right"></i> Invoice</a></li>
+                <li><a href="pages-user-profile.html"><i class="fa fa-long-arrow-right"></i> User Profile</a></li>
+                <li><a href="pages-lock-screen.html"><i class="fa fa-long-arrow-right"></i> Lockscreen</a></li>
+                <li><a href="pages-blank-page.html"><i class="fa fa-long-arrow-right"></i> Blank Page</a></li>
+                <li><a href="pages-coming-soon.html"><i class="fa fa-long-arrow-right"></i> Coming Soon</a></li>
+                <li><a href="pages-403.html"><i class="fa fa-long-arrow-right"></i> 403 Error</a></li>
+                <li><a href="pages-404.html"><i class="fa fa-long-arrow-right"></i> 404 Error</a></li>
+                <li><a href="pages-500.html"><i class="fa fa-long-arrow-right"></i> 500 Error</a></li>
+            </ul>
+        </li>
+
+        @if (User.IsInRole("A") || User.IsInRole("U"))
+        {
+            <li>
+                <a href="javaScript:void();" class="waves-effect">
+                    <i class="icon-share"></i><span>Multilevel</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li><a href="javaScript:void();"><i class="fa fa-long-arrow-right"></i> Level One</a></li>
+                    <li>
+                        <a href="javaScript:void();"><i class="fa fa-long-arrow-right"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="sidebar-submenu">
+                            <li><a href="javaScript:void();"><i class="fa fa-long-arrow-right"></i> Level Two</a></li>
+                            <li>
+                                <a href="javaScript:void();"><i class="fa fa-long-arrow-right"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="sidebar-submenu">
+                                    <li><a href="javaScript:void();"><i class="fa fa-long-arrow-right"></i> Level Three</a></li>
+                                    <li><a href="javaScript:void();"><i class="fa fa-long-arrow-right"></i> Level Three</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="javaScript:void();" class="waves-effect"><i class="fa fa-long-arrow-right"></i> Level One</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-header">LABELS</li>
+            <li><a href="javaScript:void();" class="waves-effect"><i class="icon-cloud-upload text-danger"></i><span>Disk Space</span></a></li>
+            <li><a href="javaScript:void();" class="waves-effect"><i class="icon-hourglass text-warning"></i><span>Siteye Git</span></a></li>
+            <li><a href="javaScript:void();" class="waves-effect"><i class="icon-drop text-info"></i><span>Bilgilendirme</span></a></li>
+        }
+
+
+    </ul>
+
+</div>

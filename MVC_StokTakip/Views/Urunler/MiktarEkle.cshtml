@@ -1,0 +1,73 @@
+﻿@model MVC_StokTakip.MyModel.MyUrunler
+@{
+
+    ViewBag.Title = "MiktarEkle";
+}
+
+<div class="row">
+
+    <div class="col-md-12 pull-left">
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("MiktarEkle", "Urunler", FormMethod.Post))
+                {
+                    @Html.ValidationSummary() @*Tüm validationların alt alta gözükmesini sağlıyo*@
+                    @Html.AntiForgeryToken()
+
+                    <h4 class="form-header text-uppercase">
+                        <i class="fas fa-plus-square"></i> ÜRÜN MİKTAR EKLEME
+                    </h4>
+
+
+                    @Html.HiddenFor(m => m.ID)
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.ID, new { @class = "col-sm-2 col-form-label" })
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(m => m.ID, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(m => m.ID, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(m => m.Miktar, new { @class = "col-sm-2 col-form-label" })
+                        <button type="button" class="btn btn-danger btn-sm" id="btnMiktar" onclick="azalt()"><i class="fa fa-minus-square"></i></button>
+                        <div class="col-sm-2">
+                            @Html.TextBoxFor(m => m.Miktar, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Miktar, null, new { @class = "text-danger" })
+                        </div>
+                        <button type="button" class="btn btn-success btn-sm" id="btnMiktar" onclick="arttir()"><i class="fa fa-plus-square"></i></button>
+                    </div>
+                    <div class="form-footer">
+                        <button class="btn btn-success"><i class="far fa-save"></i> KAYDET</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@*<input type=button onclick="arttir()" value="+">
+    <input type=button onclick="azalt()" value="-">
+    <input type="text" id="sonuc" value="0">*@
+
+
+<script>
+    function arttir() {
+
+        var sonuc = document.getElementById("Miktar");
+        sonuc.value = parseFloat(sonuc.value) + 1;
+
+    }
+    function azalt() {
+
+        var sonuc = document.getElementById("Miktar");
+        sonuc.value = parseFloat(sonuc.value) - 1;
+        if (sonuc.value < 1) {
+            sonuc.value = 1;
+        }
+    }
+
+</script>
+

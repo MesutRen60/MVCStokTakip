@@ -1,0 +1,96 @@
+﻿@model List<MVC_StokTakip.Models.Entity.Satislar>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="card p-2">
+            <div class="card-header"><i class="fa fa-table"></i> Satışlar Listesi</div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Satışlar Listesi             
+            </div>
+            <div class="card-body">
+
+                <table id="tblUrun" class="table border-primary table-responsive">
+                    <thead>
+                        <tr>
+                           
+                            <th>URUNADI</th>
+                            <th>KULLANICI</th>
+                            <th>BARKODNO</th>
+                            <th>BİRİM FİYATI</th>
+                            <th>MİKATARI</th>
+                            <th>TOPLAM FİYATI</th>
+                            <th>KDV</th>
+                            <th>TARİH</th>
+                            <th>SAAT</th>
+                            <th>İşlemleri</th>
+                            <th>İşlemleri</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var sts in Model)
+                        {
+                        <tr>
+                            <td>@Html.DisplayFor(x => sts.Urunler.UrunAdi)</td>
+                            <td>@Html.DisplayFor(x => sts.Kullanicilar.KullaniciAdi)</td>
+                            <td>@Html.DisplayFor(x => sts.BarkodNo) ₺</td>
+                            <td>@Html.DisplayFor(x => sts.BirimFiyati)</td>
+                            <td>@Html.DisplayFor(x => sts.Miktari)</td>
+                            <td>@Html.DisplayFor(x => sts.ToplamFiyati)</td>
+                            <td>@Html.DisplayFor(x => sts.KDV)</td>
+                            @*<td>@Html.DisplayFor(x => sts.Tarih.ToString("dd.MM.yyyy"))</td>*@
+                            <td>@Convert.ToDateTime(sts.Tarih).ToString("dd/MM/yyyy")</td>
+                            <td>@Convert.ToDateTime(sts.Saat).ToShortTimeString()</td>
+                            @*<td>@Html.DisplayFor(x => sts.Saat)</td>*@
+                            <td>
+                                @*Bootbox alert silme işlemleri*@
+                                @Html.ActionLink(" ", "Sil", new { id = sts.ID }, new { @class = "btn btn-danger fa fa-trash-alt" })@*1.Yöntem*@
+                          </td>
+                            <td>
+                                @Html.ActionLink(" ", "GuncelleBilgiGetir", new { id = sts.ID }, new { @class = "btn btn-primary fa fa-edit" })
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>URUNADI</th>
+                            <th>KULLANICI</th>
+                            <th>BARKODNO</th>
+                            <th>BİRİM FİYATI</th>
+                            <th>MİKATARI</th>
+                            <th>TOPLAM FİYATI</th>
+                            <th>KDV</th>
+                            <th>TARİH</th>
+                            <th>SAAT</th>
+                            <th>İşlemler</th>
+                            <th>İşlemler</th>
+
+                        </tr>
+                    </tfoot>
+                </table>
+                <br /><br />
+                @if (User.IsInRole("A"))
+                {
+                    <a href="/Urunler/Ekle" class="btn btn-success"><i class="fas fa-plus-square"></i> YENİ ÜRÜN EKLE</a>
+                }
+            </div>
+        </div>
+    </div>
+
+
+</div>
+

@@ -1,0 +1,14 @@
+﻿.input-validation-error {
+    border: solid 1px red;
+}
+
+.field-validation-error {
+    color: red;
+    font-size: 12px;
+}
+
+.validation-summary-errors {
+    color: red;
+    font-size:12px;
+        
+}

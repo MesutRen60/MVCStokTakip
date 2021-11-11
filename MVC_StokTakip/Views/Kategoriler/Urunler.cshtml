@@ -1,0 +1,77 @@
+﻿@model List<MVC_StokTakip.Models.Entity.Urunler>
+@{
+    ViewBag.Title = "Urunler";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i>@ViewBag.ViewKategori Kategorisindeki Ürünler</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblMarkalar" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Sıra No</th>
+                                <th>ID</th>
+                                <th>URUNADI</th>
+                                <th>MARKA</th>
+                                <th>BARKODNO</th>
+                                <th>SATIŞ FİYATI</th>
+                                <th>MİKTAR</th>
+                                <th>BİRİM</th>
+                                <th>KDV</th>
+                                <th>TARİH</th>
+                                <th>AÇIKLAMA</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                            int satir=0; 
+                            }
+                            @foreach (var urn in Model)
+                            {
+                                satir++;
+                            <tr>
+                                <td>@satir</td>
+                                <td>@Html.DisplayFor(x => urn.ID)</td>
+                                <td>@Html.DisplayFor(x => urn.UrunAdi)</td>
+                                <td>@Html.DisplayFor(x => urn.Markalar.Marka)</td>
+                                <td>@Html.DisplayFor(x => urn.BarkodNo)</td>
+                                <td>@Html.DisplayFor(x => urn.SatisFiyati)</td>
+                                <td>@Html.DisplayFor(x => urn.Miktar)</td>
+                                <td>@Html.DisplayFor(x => urn.Birimler.Birim)</td>
+                                <td>@Html.DisplayFor(x => urn.KDV)</td>
+                                <td>@Convert.ToDateTime(urn.Tarih).ToString("dd/MM/yyyy")</td>
+                                <td>@Html.DisplayFor(x => urn.Aciklama)</td>
+
+                            </tr>
+
+
+
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>@Model.Count() Kayıt</th>
+                                <th>ID</th>
+                                <th>URUNADI</th>
+                                <th>MARKA</th>
+                                <th>BARKODNO</th>
+                                <th>SATIŞ FİYATI</th>
+                                <th>MİKTAR</th>
+                                <th>BİRİM</th>
+                                <th>KDV</th>
+                                <th>TARİH</th>
+                                <th>AÇIKLAMA</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

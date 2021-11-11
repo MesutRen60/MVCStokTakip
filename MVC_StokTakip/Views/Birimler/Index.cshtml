@@ -1,0 +1,73 @@
+﻿@using MVC_StokTakip.Models.Entity;
+@model List<Birimler>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="card p-2">
+            <div class="card-header"><i class="fa fa-table"></i> Birimler Listesi</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Birim Listesi</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblBIRIM" class="table border-primary">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>BİRİM</th>
+                                <th>AÇIKLAMA</th>
+                                <th>İŞLEMLER</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var birim in Model)
+                            {
+                                <tr>
+                                    <td>@birim.ID</td>
+                                    <td>@birim.Birim</td>
+                                    <td>@birim.Aciklama</td>
+                                    <td>
+                                        <a href="/Birimler/BirimlerSil/@birim.ID" class="btn btn-danger btn-sm"><i class="fas fa-eraser"></i></a>
+                                        <a href="/Birimler/SilBilgiGetir/@birim.ID" class="btn btn-danger btn-sm"><i class="fas fa-eraser"></i>Yönt2</a>
+                                        <a href="/Birimler/GuncelleGetir/@birim.ID" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>BİRİM</th>
+                                <th>AÇIKLAMA</th>
+                                <th>İŞLEMLER</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <br /><br />
+                    <a href="/Birimler/BirimEkle" class="btn btn-success"><i class="fas fa-plus-square"></i> YENİ BİRİM EKLE</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+

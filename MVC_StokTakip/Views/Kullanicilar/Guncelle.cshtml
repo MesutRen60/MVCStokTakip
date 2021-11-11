@@ -1,0 +1,191 @@
+﻿@model MVC_StokTakip.Models.Entity.Kullanicilar
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Kullanıcı Kayıt Düzenleme Sayfası</title>
+    <!--favicon-->
+    <link rel="icon" href="~/color-admin/assets/images/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap core CSS-->
+    <link href="~/color-admin/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- animate CSS-->
+    <link href="~/color-admin/assets/css/animate.css" rel="stylesheet" type="text/css" />
+    <!-- Icons CSS-->
+    <link href="~/color-admin/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <!-- Custom Style-->
+    <link href="~/color-admin/assets/css/app-style.css" rel="stylesheet" />
+    <!--Validation için stillerim-->
+    <link href="~/color-admin/assets/css/Site.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!-- Start wrapper-->
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="height:100vh">
+            <div id="wrapper">
+                <div class="card-authentication2 mx-auto animated slideInLeft">
+                    <div class="card-group">
+                        <div class="card mb-0">
+                            <div class="bg-signin2"></div>
+                            <div class="card-img-overlay rounded-left my-5">
+                                <h1 class="text-white">Kullanıcı Kayıt Güncelleme Formu</h1>
+                                <h2 class="text-white">Hoşgeldiniz..</h2>
+                                <p class="card-text text-dark pt-3">Yandaki formu kullanarak bilgilerinizi güncelleyebilirsiniz.</p>
+                            </div>
+                        </div>
+
+                        <div class="card mb-0 bg-dark">
+                            <div class="card-body">
+                                <div class="card-content p-3">
+                                    <div class="text-center">
+                                        <i class="fa fa-registered fa-5x text-warning"></i>
+
+
+                                    </div>
+                                    <div class="card-title text-uppercase text-center text-white py-2">Kayıt Güncelleme</div>
+
+                                    @if (ViewBag.Uyari != null)
+                                    {
+
+                                        <div class="alert alert-danger alert-dismissible" role="alert">
+                                            <button type="button" class="close" data-dismiss="alert">×</button>
+                                            <div class="alert-icon contrast-alert">
+                                                <i class="icon-close"></i>
+                                            </div>
+                                            <div class="alert-message">
+                                                <span><strong>Dikkat!</strong> @ViewBag.Uyari</span>
+                                            </div>
+                                        </div>
+                                    }
+                                    @using (Html.BeginForm("Guncelle", "Kullanicilar", FormMethod.Post))
+                                    {
+                                        @Html.ValidationSummary(false, "")
+                                        @Html.AntiForgeryToken();
+
+                                        @Html.HiddenFor(m=>m.Id)
+                                        <div class="form-group">
+                                            <div class="position-relative has-icon-left">
+                                                @Html.LabelFor(m => m.KullaniciAdi, new { @class = "sr-only" })
+                                                @Html.TextBoxFor(m => m.KullaniciAdi, new { @class = "form-control", placeholder = "kullanıcıadı" })
+                                                <div class="form-control-position">
+                                                    <i class="icon-user"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(m => m.KullaniciAdi, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="position-relative has-icon-left">
+                                                @Html.LabelFor(m => m.Sifre, new { @class = "sr-only" })
+                                                @Html.TextBoxFor(m => m.Sifre, new { @class = "form-control", type = "password" })
+                                                <div class="form-control-position">
+                                                    <i class="icon-lock"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(m => m.Sifre, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="position-relative has-icon-left">
+                                                @Html.LabelFor(m => m.AdiSoyadi, new { @class = "sr-only" })
+                                                @Html.TextBoxFor(m => m.AdiSoyadi, new { @class = "form-control", placeholder = "adsoyad" })
+                                                <div class="form-control-position">
+                                                    <i class="icon-user-female"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(m => m.AdiSoyadi, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="position-relative has-icon-left">
+                                                @Html.LabelFor(m => m.Telefon, new { @class = "sr-only" })
+                                                @Html.TextBoxFor(m => m.Telefon, new { @class = "form-control", placeholder = "telefon" })
+                                                <div class="form-control-position">
+                                                    <i class="icon-phone"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(m => m.Telefon, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="position-relative has-icon-left">
+                                                @Html.LabelFor(m => m.Adres, new { @class = "sr-only" })
+                                                @Html.TextAreaFor(m => m.Adres, new { @class = "form-control", placeholder = "Adres" })
+                                                <div class="form-control-position">
+                                                    <i class="icon-location-pin"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(m => m.Adres, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="position-relative has-icon-left">
+                                                @Html.LabelFor(m => m.Email, new { @class = "sr-only" })
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "e-mail" })
+                                                <div class="form-control-position">
+                                                    <i class="icon-envelope-open"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="position-relative has-icon-left">
+                                                @Html.LabelFor(m => m.Tarih, new { @class = "sr-only" })
+                                                @Html.TextBoxFor(m => m.Tarih, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                                                <div class="form-control-position">
+                                                    <i class="icon-calendar"></i>
+                                                </div>
+                                                @Html.ValidationMessageFor(m => m.Tarih, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-success btn-block waves-effect waves-light" id="btnTik">
+                                            <i class="fa fa-2x"></i>
+                                            Güncelle
+                                        </button>
+
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--Start Back To Top Button-->
+                <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+                <!--End Back To Top Button-->
+            </div><!--wrapper-->
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <!-- waves effect js -->
+    <script src="~/color-admin/assets/js/waves.js"></script>
+    <!-- Custom scripts -->
+    <script src="~/color-admin//js/app-script.js"></script>
+
+    <!--Validation işlemleri için-->
+    <script src="~/Scripts/jquery.validate.min.js"></script>s
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+</body>
+</html>
+
+

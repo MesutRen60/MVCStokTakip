@@ -1,0 +1,157 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>DashRock - Bootstrap 4 Admin Dashboard Template</title>
+
+
+    <!--favicon-->
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+    <!-- notifications css -->
+    <link rel="stylesheet" href="~/color-admin/assets/plugins/notifications/css/lobibox.min.css" />
+    <!-- Vector CSS -->
+    <link href="~/color-admin/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
+    <!-- simplebar CSS-->
+    <link href="~/color-admin/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
+    <!-- Bootstrap core CSS-->
+    <link href="~/color-admin/assets/css/bootstrap.min.css" rel="stylesheet" />
+    <!--Data Tables -->
+    <link href="~/color-admin/assets/plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/color-admin/assets/plugins/bootstrap-datatable/css/buttons.bootstrap4.min.css" rel="stylesheet" />
+
+    <!-- animate CSS-->
+    <link href="~/color-admin/assets/css/animate.css" rel="stylesheet" type="text/css" />
+    <!-- Icons CSS-->
+    <link href="~/color-admin/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <!-- Sidebar CSS-->
+    <link href="~/color-admin/assets/css/sidebar-menu.css" rel="stylesheet" />
+
+    <!-- Custom Style-->
+    <link href="~/color-admin/assets/css/app-style.css" rel="stylesheet" />
+
+    <!--fontawesome-->
+    <link href="~/fontawesome/css/all.min.css" rel="stylesheet" />
+    <!--Validation için stillerim-->
+    <link href="~/color-admin/assets/css/Site.css" rel="stylesheet" />
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+
+
+    @*<script src="~/color-admin/assets/js/jquery.min.js"></script>*@
+    @*<script src="~/color-admin/assets/js/popper.min.js"></script>
+        <script src="~/color-admin/assets/js/bootstrap.min.js"></script>*@
+
+
+
+
+
+
+    @RenderSection("CascedingUrun", false)
+    @RenderSection("Validate", false)
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+    <!-- Start wrapper-->
+    <div id="wrapper">
+
+        <!--Start sidebar-wrapper-->
+        @Html.Partial("_SideBar")
+        <!--End sidebar-wrapper-->
+        <!--Start topbar header-->
+        @Html.Partial("_Header")
+        <!--End topbar header-->
+
+        <div class="clearfix"></div>
+
+        <!--Site İçerik alanı-->
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        <!--Site İçerik alanı-->
+        <!--Start Back To Top Button-->
+        @Html.Partial("_GoTop")
+        <!--End Back To Top Button-->
+        <!--Start footer-->
+        @RenderSection("_Footer", false)
+        @*@Html.Partial("_Footer")*@
+        <!--End footer-->
+
+    </div>
+
+    <!--End wrapper-->
+    
+
+    <!--Data Tables js-->
+    @*<link href="~/color-admin/assets/plugins/bootstrap-datatable/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+        <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/jquery.dataTables.min.js"></script>
+        <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/dataTables.bootstrap4.min.js"></script>*@
+
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/dataTables.buttons.min.js"></script>
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/jszip.min.js"></script>
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/pdfmake.min.js"></script>
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/vfs_fonts.js"></script>
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/buttons.html5.min.js"></script>
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/buttons.print.min.js"></script>
+    <script src="~/color-admin/assets/plugins/bootstrap-datatable/js/buttons.colVis.min.js"></script>
+
+
+
+
+    <!--SweetAlert js-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js "></script>
+
+
+    <script src="~/CustomScripts/Cutsom.js"></script>
+
+    <!--Bootbox alet silme işlemi-->
+    @*Ajax ile silme işlemlerinde alerti gösterişli yapmak için*@
+    <script src="~/Scripts/bootbox.min.js"></script>
+    @RenderSection("BootBox", false)
+    <!--MArka,Ürün Silme ve KAtegori KAydetmede kullanıldı-->
+    <!-- simplebar js -->
+    <script src="~/color-admin/assets/plugins/simplebar/js/simplebar.js"></script>
+    <!-- waves effect js -->
+    <script src="~/color-admin/assets/js/waves.js"></script>
+    <!-- sidebar-menu js -->
+    <script src="~/color-admin/assets/js/sidebar-menu.js"></script>
+    <!-- Custom scripts -->
+    <script src="~/color-admin/assets/js/app-script.js"></script>
+
+    <!-- Vector map JavaScript -->
+    <script src="~/color-admin/assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="~/color-admin/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- Sparkline JS -->
+    <script src="~/color-admin/assets/plugins/sparkline-charts/jquery.sparkline.min.js"></script>
+    <!-- Chart js -->
+    <script src="~/color-admin/assets/plugins/Chart.js/Chart.min.js"></script>
+    <!--notification js -->
+    <script src="~/color-admin/assets/plugins/notifications/js/lobibox.min.js"></script>
+    <script src="~/color-admin/assets/plugins/notifications/js/notifications.min.js"></script>
+    <!-- Index js -->
+    <script src="~/color-admin/assets/js/index.js"></script>
+
+
+</body>
+</html>
+

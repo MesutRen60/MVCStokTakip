@@ -1,0 +1,105 @@
+﻿@using MVC_StokTakip.Models.Entity;
+@model List<Markalar>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 mt-5">
+        <div class="card p-2">
+            <div class="card-header"><i class="fa fa-table"></i> Marka Listesi</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Marka Listesi</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblMarkalar" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>KATEGORİ</th>
+                                <th>Marka</th>
+                                <th>AÇIKLAMA</th>
+                                <th>İŞLEMLER</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var marka in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(x => marka.ID)</td>
+                                    <td>@Html.DisplayFor(x => marka.Kategoriler.Kategori)</td>
+                                    <td>@Html.DisplayFor(x => marka.Marka)</td>
+                                    <td>@Html.DisplayFor(x => marka.Aciklama)</td>
+                                    <td>
+                                        <a href="/Markalar/SilBilgiGetir/@marka.ID" class="btn btn-danger btn-sm"><i class="fas fa-eraser"></i>Sayfayataşı</a>
+                                        <a class="btn btn-danger btn-sm text-white" onclick="Delete(@marka.ID)"><i class="fas fa-eraser"></i>Modal</a>
+                                        <a class="btn btn-danger btn-sm  text-white btnMarkasil" data-id="@marka.ID"><i class="fas fa-eraser"></i>swetalert</a>
+                                        <button type="submit" name="btn" class="btn btn-sm btn-danger btnMarkasil" data-id="@marka.ID">swetalert2</button>@*4.Yöntem*@
+                                        @Html.ActionLink("AlertSil", "MarkalarSil", new { id = marka.ID }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Silmek istediğinizden emin misiniz')" })
+                                        <a href="/Markalar/MarkaGetir/@marka.ID" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                        <script>
+                                            function Delete(id) {
+                                                var link = "/Markalar/MarkalarSil/" + id;
+                                                jQuery("#modalLinkMarka").attr("href", link); /*modalLink Modal daki sil butonunun İdsi*/
+                                                jQuery("#deletemarka").modal()
+                                            }
+                                        </script>
+                                    </td>
+                                </tr>
+
+
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>@Model.Count() Kayıt</th>
+                                <th>KATEGORİ</th>
+                                <th>Marka</th>
+                                <th>AÇIKLAMA</th>
+                                <th>İŞLEMLER</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <br /><br />
+                    <a href="/Markalar/MarkaEkle" class="btn btn-success"><i class="fas fa-plus-square"></i>Yenı Marka Ekle</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!--Data Tables js--------------------------------->
+
+
+<div class="modal fade" id="deletemarka">
+    <div class="modal-dialog">
+        <div class="modal-content border-danger">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white"><i class="fa fa-star"></i> Kayıt Silme</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Kayıt silincektir emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Kapat</button>
+                <a class="btn btn-danger" id="modalLinkMarka"><i class="fa fa-check-square-o"></i> Sil</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

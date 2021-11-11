@@ -1,0 +1,217 @@
+﻿@model MVC_StokTakip.MyModel.MyKategoriler
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="row">
+    <div class="col-md-12 mt-5">
+        <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Yeni kategori Ekle</button>
+
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Kategori Listesi</div>
+            <div class="card-body">
+               
+                <table id="tblKategori" class="table table-bordered table-responsive">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>KATEGORİ</th>
+                            <th>AÇIKLAMA</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+                        </tr>
+                    </thead>
+                    <tbody id="SetKategoriList">
+                        @*<tr id="Load" style="color:red">
+                            Yükleniyor
+                        </tr>*@
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>ID</th>
+                            <th>KATEGORİ</th>
+                            <th>AÇIKLAMA</th>
+                            <th>Güncelle</th>
+                            <th>Sil</th>
+
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Ekle", "Kategoriler2", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content border-danger">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white"><i class="fa fa-star"></i> Kategori Ekleme Sayfası</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        Kategori:@Html.TextBoxFor(x => x.Kategori, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        Açıklama:@Html.TextAreaFor(x => x.Aciklama, new { @class = "form-control" })
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-check-square-o"></i> Kaydet</button>
+                    <button type="button" class="btn btn-inverse-danger" data-dismiss="modal"><i class="fa fa-times"></i>İptal</button>
+                </div>
+            </div>
+        </div>
+    </div><!--End Modal -->
+}
+@using (Html.BeginForm("Guncelle", "Kategoriler2", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="MyModal2" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content border-success">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white"><i class="fa fa-star"></i> Kategori Güncelleme Sayfası</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        ID:@Html.TextBoxFor(x => x.ID, new { @id = "id", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        Kategori:@Html.TextBoxFor(x => x.Kategori, new { @id = "kategori", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        Açıklama:@Html.TextAreaFor(x => x.Aciklama, new { @id = "aciklama", @class = "form-control" })
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-check-square-o"></i> Güncelle</button>
+                    <button type="button" class="btn btn-inverse-danger" data-dismiss="modal"><i class="fa fa-times"></i>İptal</button>
+                </div>
+            </div>
+        </div>
+    </div><!--End Modal -->
+}
+@using (Html.BeginForm("Sil", "Kategoriler2", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal fade" id="MyModal3" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content border-danger">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white"><i class="fa fa-star"></i> Kategori Silme Sayfası</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        ID:@Html.TextBoxFor(x => x.ID, new { @id = "id2", @class = "form-control", @readonly = "true" })
+                    </div>
+                    <div class="form-group">
+                        Kategori:@Html.TextBoxFor(x => x.Kategori, new { @id = "kategori2", @class = "form-control", @readonly = "true" })
+                    </div>
+                    <div class="form-group">
+                        Açıklama:@Html.TextAreaFor(x => x.Aciklama, new { @id = "aciklama2", @class = "form-control", @readonly = "true" })
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-check-square-o"></i> Sil</button>
+                    <button type="button" class="btn btn-inverse-danger" data-dismiss="modal"><i class="fa fa-times"></i>İptal</button>
+                </div>
+            </div>
+        </div>
+    </div><!--End Modal -->
+}
+
+
+<script>
+
+    //Veri listeleme alanı
+
+    $("Load").html("Yükleniyor.....");
+    //GetKAtegoriList JsonResult olarak oluşturulacak
+    $.get("/Kategoriler2/GetKategoriList", null, DataBind);
+
+    //Liste JsonResulttan çağırılacak
+    function DataBind(liste) {
+        var setData = $("#SetKategoriList");
+        for (var i = 0; i < liste.length; i++) {
+            var data = "<tr>" +
+                "<td>" + liste[i].ID + "</td>" +
+                "<td>" + liste[i].Kategori + "</td>" +
+                "<td>" + liste[i].Aciklama + "</td>" +
+                "<td>" + "<a href='#' class='btn btn-success' onclick='EditCategory(" + liste[i].ID + ")'>Güncelle</a>" + "</td> " +
+                "<td>" + "<a href='#' class='btn btn-danger' onclick='DeleteCategory(" + liste[i].ID + ")'>Sil</a>" + "</td> " +
+                "</tr>";
+            setData.append(data);
+            $("#Load").html(" ");
+
+        }
+    }
+
+
+
+    //Veri Güncellene Alanı
+    function EditCategory(ID) {
+        var url = "/Kategoriler2/GetEditDeleteCategory?ID=" + ID;
+        $("#MyModal2").modal();
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+
+                var obj = JSON.parse(data);
+                $("#id").val(obj.ID);
+                $("#kategori").val(obj.Kategori);
+                $("#aciklama").val(obj.Aciklama);
+
+            }
+
+        });
+
+    }
+    //Veri Silme Alanı
+    function DeleteCategory(ID) {
+        var url = "/Kategoriler2/GetEditDeleteCategory?ID=" + ID;
+        $("#MyModal3").modal();
+        $.ajax({
+            url: url,
+            type: "get",
+            success: function (data) {
+
+                var obj = JSON.parse(data);
+                $("#id2").val(obj.ID);
+                $("#kategori2").val(obj.Kategori);
+                $("#aciklama2").val(obj.Aciklama);
+
+            }
+
+        });
+
+    }
+
+
+</script>

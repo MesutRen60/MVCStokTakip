@@ -1,0 +1,123 @@
+﻿@using MVC_StokTakip.Models.Entity
+@model List<Kategoriler>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 mt-5">
+        <div class="card p-2">
+            <div class="card-header"><i class="fa fa-table"></i> Kategori Listesi</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header"><i class="fa fa-table"></i> Kategori Listesi</div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="tblKategori" class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>KATEGORİ</th>
+                                <th>AÇIKLAMA</th>
+                                <th>İŞLEMLER</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var kat in Model)
+                            {
+                                <tr>
+                                    <td>@kat.ID</td>
+                                    <td>@kat.Kategori</td>
+                                    <td>@kat.Aciklama</td>
+                                    <td>
+                                        <a href="/Kategoriler/SilBilgiGetir/@kat.ID" class="btn btn-danger btn-sm"><i class="fas fa-eraser"></i>SilYaöntem1</a>
+                                        <a class="btn btn-danger btn-sm" onclick="Delete(@kat.ID)"><i class="fas fa-eraser"></i></a>
+                                        <a href="/Kategoriler/KategoriGetir/@kat.ID" class="btn btn-success btn-sm"><i class="fas fa-edit"></i></a>
+                                        <script>
+                                            function Delete(id) {
+                                                var link = "/Kategoriler/KategorilerSil/" + id;
+                                                jQuery("#modalLinkKategori").attr("href", link); /*modalLink Modal daki sil butonunun İdsi*/
+                                                jQuery("#deletekategori").modal()
+                                            }
+                                        </script>
+
+                                        <a href="/Kategoriler/Markalar/@kat.ID" class="btn btn-success btn-sm">Markalar</a>
+                                        <a href="/Kategoriler/Urunler/@kat.ID" class="btn btn-success btn-sm">Ürünler</a>
+                                    </td>
+                                </tr>
+
+
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>ID</th>
+                                <th>KATEGORİ</th>
+                                <th>AÇIKLAMA</th>
+                                <th>İŞLEMLER</th>
+
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <br /><br />
+
+                    @if (User.IsInRole("A"))
+                    {
+                        <a href="/Kategoriler/KategoriEkle" class="btn btn-success"><i class="fas fa-plus-square"></i>Yenı Kategorı Ekle</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+@*<script>
+    $(document).ready(function () {
+        $('#tblKategori').DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Turkish.json"
+            }
+        });
+    });
+</script>*@
+
+
+
+
+
+
+<!--Data Tables js--------------------------------->
+
+
+<div class="modal fade" id="deletekategori">
+    <div class="modal-dialog">
+        <div class="modal-content border-danger">
+            <div class="modal-header bg-danger">
+                <h5 class="modal-title text-white"><i class="fa fa-star"></i> Kayıt Silme</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Kayıt silincektir emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Kapat</button>
+                <a class="btn btn-danger" id="modalLinkKategori"><i class="fa fa-check-square-o"></i> Sil</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

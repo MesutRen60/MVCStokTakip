@@ -1,0 +1,233 @@
+﻿@using MVC_StokTakip.Models.Entity
+@model List<Urunler>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="card p-2">
+            <div class="card-header"><i class="fa fa-table"></i> Ürünler Listesi</div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 mt-4">
+        <div class="card p-2">
+            <div class="card-header">
+
+                @using (Html.BeginForm("Index", "Urunler", FormMethod.Post))
+                {
+                    <div class="form-group row">
+                        <div class="col-sm-11 col-10">
+                            <input type="text" class="form-control form-control-square" name="ara" id="input-16" placeholder="Ürün adı veya barkod no giriniz.">
+
+                        </div>
+                        <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                        @*@Html.ActionLink("Ara", "Index", null, new { @class = "btn btn-info", onclick = "$(this).parents('form').attr('action', $(this).attr('href'));$(this).parents('form').submit();return false;" })*@
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (TempData["Mesaj"]!=null)
+{
+<div class="alert alert-success alert-dismissible __web-inspector-hide-shortcut__" role="alert">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <div class="alert-icon">
+        <i class="icon-check"></i>
+    </div>
+    <div class="alert-message">
+        <span><strong>Success!</strong> @TempData["Mesaj"]</span>
+    </div>
+</div>
+}
+
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-table"></i> Ürün Listesi
+                <a href="@Url.Action("ExcellExport","Urunler")" class="btn btn-success pull-right"> <i class="fa fa-file-excel-o"></i> Excell Export</a>
+            </div>
+            <div class="card-body">
+
+                <table id="tblUrun" class="table border-primary table-responsive">
+                    <thead>
+                        <tr>
+                            @*<th>ID</th>
+                                <th>KATEGORİ</th>
+                                <th>MARKA</th>*@
+                            <th>URUNADI</th>
+                            <th>BARKODNO</th>
+                            @*<th>ALIŞ FİYATI</th>*@
+                            <th>SATIŞ FİYATI</th>
+                            <th>MİKTAR</th>
+                            <th>BİRİM</th>
+                            <th>KDV</th>
+                            <th>TARİH</th>
+                            <th>AÇIKLAMA</th>
+                            @if (User.IsInRole("A"))
+                            {
+                                <th>Miktar Ekle</th>
+                            }
+                            <th>Silme İşlemleri</th>
+                            <th>Güncelle</th>
+                            <th>Sepete Ekle</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var urn in Model)
+                        {
+                            <tr>
+                                @*<td>@Html.DisplayFor(x => urn.ID)</td>
+                                    <td>@Html.DisplayFor(x => urn.Kategoriler.Kategori)</td>
+                                    <td>@Html.DisplayFor(x => urn.Markalar.Marka)</td>*@
+                                <td>@Html.DisplayFor(x => urn.UrunAdi)</td>
+                                <td>@Html.DisplayFor(x => urn.BarkodNo)</td>
+                                @*<td>@Html.DisplayFor(x => urn.AlisFiyati) ₺</td>*@
+                                <td>@Html.DisplayFor(x => urn.SatisFiyati) ₺</td>
+                                <td>@Html.DisplayFor(x => urn.Miktar)</td>
+                                <td>@Html.DisplayFor(x => urn.Birimler.Birim)</td>
+                                <td>%@Html.DisplayFor(x => urn.KDV)</td>
+                                @*<td>@Html.DisplayFor(x => urn.Tarih)</td>*@
+                               <td>@Convert.ToDateTime(urn.Tarih).ToString("dd/MM/yyyy")</td>
+                                <td>@Html.DisplayFor(x => urn.Aciklama)</td>
+                                @if (User.IsInRole("A"))
+                                {
+                                    <td>
+                                        @Html.ActionLink(" ", "MiktarEkle", new { id = urn.ID }, new { @class = "btn btn-danger fa fa-cart-plus" })
+                                    </td>
+                                    <td>
+
+                                        @*Bootbox alert silme işlemleri*@
+                                        @Html.ActionLink(" ", "Sil", new { id = urn.ID }, new { @class = "btn btn-danger fa fa-trash-alt" })@*1.Yöntem*@
+                                        <a class="btn btn-sm btn-danger text-white rounded-pill btnurunSil" data-id="@urn.ID">SİL</a>@*2.Yöntem*@
+                                        <input type="submit" name="btn" class="btn btn-danger btnurunSil" value="SilBootbox" data-id="@urn.ID" />@*3.Yöntem*@
+                                        <button type="submit" name="btn" class="btn btn-danger btnurunSil" data-id="@urn.ID">SilBootbox2</button>@*4.Yöntem*@
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(" ", "GuncelleBilgiGetir", new { id = urn.ID }, new { @class = "btn btn-primary fa fa-edit" })
+
+                                    </td>
+                                }
+                                <td>
+                                    @Html.ActionLink(" ", "SepeteEkle", "Sepet", new { id = urn.ID }, new { @class = "btn btn-success fa fa-cart-plus" })
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            @*<th>ID</th>
+                                <th>KATEGORI</th>
+                                <th>MARKA</th>*@
+                            <th>URUNADI</th>
+                            <th>BARKODNO</th>
+                            @*<th>ALIŞFİYATI</th>*@
+                            <th>SATIŞFİYATI</th>
+                            @*<th>MİKTAR</th>*@
+                            <th>BİRİM</th>
+                            <th>KDV</th>
+                            <th>TARİH</th>
+                            <th>AÇIKLAMA</th>
+                            <th>İŞLEMLER</th>
+
+                        </tr>
+                    </tfoot>
+                </table>
+                <br /><br />
+                @if (User.IsInRole("A"))
+                {
+                    <a href="/Urunler/Ekle" class="btn btn-success"><i class="fas fa-plus-square"></i> YENİ ÜRÜN EKLE</a>
+                }
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+@section BootBox{
+
+    @*<script type="text/javascript">
+            $(function () {
+
+                $("#tblUrun").on("click", ".btnurunSil", function () {
+                    var btn = $(this);
+                    bootbox.confirm(btn.data("id")+ Nolu Ürünü silmek istediğinize emin misiniz?", function (result) {
+                        if (result) {
+                            var id = btn.data("id");
+                            //alert(id);
+                            $.ajax({
+                                type: "GET",
+                                url: "/Urunler/Sil/" + id,
+                                success: function () {
+                                    //console.log("Silme İşlemi başarılı..");
+                                    btn.parent().parent().remove();
+                                }
+                            });
+                        }
+                    });
+                });
+
+            });
+
+
+        </script>*@
+
+    @*Butonları renklendirme*@
+    <script type="text/javascript">
+
+        $(function () {
+
+            $("#tblUrun").on("click", ".btnurunSil", function () {
+                var btn = $(this);
+                bootbox.confirm({
+                    message: btn.data("id") + " ID Nolu Ürünü silmek istediğinize emin misiniz?",
+                    buttons: {
+                        confirm: {
+                            label: 'Evet',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'Hayır',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result) {
+                            var id = btn.data("id");
+                            //alert(id);
+                            $.ajax({
+                                type: "GET",
+                                url: "/Urunler/Sil/" + id,
+                                success: function () {
+                                    //console.log("Silme İşlemi başarılı..");
+                                    btn.parent().parent().remove();
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+
+        });
+
+
+    </script>
+
+
+}

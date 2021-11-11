@@ -1,0 +1,127 @@
+﻿@model MVC_StokTakip.Models.Entity.Kullanicilar
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>DashRock - Bootstrap 4 Admin Dashboard Template</title>
+    <!--favicon-->
+    <link rel="icon" href="~/color-admin/assets/images/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap core CSS-->
+    <link href="~/color-admin/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- animate CSS-->
+    <link href="~/color-admin/assets/css/animate.css" rel="stylesheet" type="text/css" />
+    <!-- Icons CSS-->
+    <link href="~/color-admin/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <!-- Custom Style-->
+    <link href="~/color-admin/assets/css/app-style.css" rel="stylesheet" />
+
+</head>
+
+<body class="authentication-bg">
+    <!-- Start wrapper-->
+    <div id="wrapper">
+        <div class="card card-authentication1 mx-auto my-5 animated zoomIn bg-dark">
+            <div class="card-body">
+                <div class="card-content p-2">
+                    <div class="text-center">
+                        <img src="~/color-admin/assets/images/logo-icon.png" />
+                    </div>
+                    <div class="card-title text-uppercase text-center py-2 text-white">GİRİŞ</div>
+
+                    <div>
+                        @if (ViewBag.hata != null)
+                        {
+
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert">×</button>
+                                <div class="alert-icon contrast-alert">
+                                    <i class="icon-close"></i>
+                                </div>
+                                <div class="alert-message">
+                                    <span><strong>Dikkat!</strong> @ViewBag.hata</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    @using (Html.BeginForm("Login", "Kullanicilar", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <div class="position-relative has-icon-left">
+                                <label for="KullaniciAdi" class="sr-only">Username</label>
+                                @*<input type="text" id="exampleInputUsername" class="form-control" placeholder="kullanıcıadı">*@
+                                @Html.TextBoxFor(k => k.KullaniciAdi, new { @class = "form-control" })
+                                <div class="form-control-position">
+                                    <i class="icon-user"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="position-relative has-icon-left">
+                                <label for="exampleInputPassword" class="sr-only">Password</label>
+                                @*<input type="password" id="exampleInputPassword" class="form-control" placeholder="şifre">*@
+                                @Html.TextBoxFor(k => k.Sifre, new { @class = "form-control", type = "password" })
+                                <div class="form-control-position">
+                                    <i class="icon-lock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row mr-0 ml-0">
+                            <div class="form-group col-6">
+                                <div class="demo-checkbox">
+                                    <input type="checkbox" id="user-checkbox" class="filled-in chk-col-danger" checked="" />
+                                    <label for="user-checkbox">Beni Hatırla</label>
+                                </div>
+                            </div>
+                            <div class="form-group col-6 text-right">
+                                <a href="@Url.Action("ResetPassword","Kullanicilar")" class="text-info">Şifremi Unuttum</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button class="btn btn-success btn-block waves-effect waves-light">Giriş</button>
+                        </div>
+                        <div class="form-group text-center">
+                            <p class="text-white">Henüz Üye değil misiniz ? <a href="@Url.Action("Kaydol","Kullanicilar")" class="text-info">Üye Ol</a></p>
+                        </div>
+                        <div class="form-group text-center">
+                            <hr class="border-secondary">
+                            <h5 class="text-white">veya</h5>
+                        </div>
+                        <div class="form-group row text-center  justify-content-center">
+                            <button type="button" class="btn btn-twitter text-white waves-effect waves-light  mx-1"><i class="fa fa-twitter"></i></button>
+                            <button type="button" class="btn btn-facebook text-white waves-effect waves-light mx-1"><i class="fa fa-facebook"></i> </button>
+
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <!--Start Back To Top Button-->
+        <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+        <!--End Back To Top Button-->
+    </div><!--wrapper-->
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/color-admin/assets/js/jquery.min.js"></script>
+    <script src="~/color-admin/assets/js/popper.min.js"></script>
+    <script src="~/color-admin/assets/js/bootstrap.min.js"></script>
+    <!-- waves effect js -->
+    <script src="~/color-admin/assets/js/waves.js"></script>
+    <!-- Custom scripts -->
+    <script src="~/color-admin/assets/js/app-script.js"></script>
+
+</body>
+</html>
