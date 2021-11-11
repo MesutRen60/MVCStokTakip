@@ -1,0 +1,2 @@
+# MVCStokTakip
+Stok Takip Uygulama
